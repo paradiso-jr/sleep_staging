@@ -57,11 +57,6 @@ def main():
                         type=str, 
                         default="info_ch_extract.log",
                         help="Log file.")
-    parser.add_argument("--type",
-                        type=str,
-                        choices=["sleep-cassette", "sleep-telemetry"],
-                        default="sleep-cassette",
-                        help="Type of sleep-edf dataset")
     parser.add_argument("--w_edge_mins",
                         type=int,
                         default=30,
@@ -69,21 +64,20 @@ def main():
     args = parser.parse_args()
 
     for select_ch in list(args.select_ch):
-        in_dir = Path(args.type) / \
-                 Path(args.data_dir)
-                 
-        out_dir = Path(args.type) / \
-                  Path(args.output_dir) / \
-                  Path("{}_w_edge_{}_mins".format(select_ch.split(" ")[-1], args.w_edge_mins))
+        in_dir = Path(args.data_dir)
+        out_dir = Path(args.output_dir) / \
+                Path("w_edge_{}_mins".format(args.w_edge_mins)) /\
+                Path(f"{select_ch.split(' ')[0]}")
         
         # if target channel have been preprocessced, then continue
+        print(out_dir)
         if out_dir.exists():
             continue
         
-        out_dir.mkdir()
+        out_dir.mkdir(parents=True)
         
         log_file = out_dir / Path(args.log_file)
-                   
+
         # Create logger
         logger = logging.getLogger()
         logger.setLevel(logging.INFO)
