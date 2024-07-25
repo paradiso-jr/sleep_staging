@@ -1,0 +1,9 @@
+# dataset
+/dset
+
+# runs
+/runs
+
+#  other
+__pycache__
+nohup.out
