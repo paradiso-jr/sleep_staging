@@ -1,3 +1,9 @@
-data/Sleep-EDF/download_log
-data/Sleep-EDF/edf
-data/Sleep-EDF/npz
+# dataset
+/dset
+
+# runs
+/runs
+
+#  other
+__pycache__
+nohup.out

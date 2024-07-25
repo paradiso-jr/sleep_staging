@@ -1,0 +1,38 @@
+PRETRAIN:
+  model:
+    backbone: 'bert-base-uncased'
+    ckpt_path: null
+    in_channel: 1
+    h_dim: 32
+    vocab_size: 30000
+    beta: 0.25
+    embed_dim: 768
+  train:
+    ft_paths: "/data_new/home/wujr_ethan/sleep-staging/bert_TCM/dset/Sleep-EDF-2018/npz/Fpz-Cz"
+    batch_size: 1
+    epochs: 4
+    lr: 8e-4
+    n_labels: 5
+    temperature: 0.2
+    seed: 42
+    log_every_n_steps: 50
+    accumulation_steps: 10
+FINE_TUNING:
+  TCM:
+    temporal_context_modules: 'mamba'
+    ckpt_path: null
+    temporal_context_length: 30
+    window_size: 15
+    sfreq: 100
+    rfreq: 100
+    embed_dim: 512
+  train:
+    ft_paths: "/data_new/home/wujr_ethan/sleep-staging/bert_TCM/dset/Sleep-EDF-2018/npz/Fpz-Cz"
+    batch_size: 2
+    warmup_epochs: 3
+    epochs: 30
+    lr: 8e-5
+    n_labels: 5
+    seed: 42
+    log_every_n_steps: 50
+    accumulation_steps: 5
