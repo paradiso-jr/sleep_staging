@@ -1,4 +1,5 @@
 import os
+import math
 import yaml
 import random
 import torch
@@ -45,8 +46,7 @@ class TemporalContextModule(nn.Module):
     def apply_backbone(self, x):
         bs = x.shape[0]
         temporal_context_length = x.shape[1]
-        x = x.reshape(bs*temporal_context_length, -1)
-        x = x.unsqueeze(1)
+        x = x.reshape(bs*temporal_context_length, 1, -1)
         x, _, _, _ = self.backbone(x)
         # do not mean across cls and sep token
         x = torch.mean(x[:,1:-1,:], dim=1)

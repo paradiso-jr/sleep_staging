@@ -39,7 +39,7 @@ class TimeSeriesCnnEmbedding(nn.Module):
         self.layers = [1, 1, 1, 1]
         self.conv1 = nn.Conv1d(in_channel, 16, kernel_size=1, stride=1)
         self.bn1 = nn.BatchNorm1d(16)
-        self.relu = nn.GELU()
+        self.relu = nn.SiLU()
 
 
         self.layer3x3_1 = self._make_layer3(BasicBlock3x3, 16, self.layers[0], stride=1)
@@ -169,7 +169,7 @@ class BasicBlock3x3(nn.Module):
         super(BasicBlock3x3, self).__init__()
         self.conv1 = conv3x3(inplanes3, planes, stride)
         self.bn1 = nn.BatchNorm1d(planes)
-        self.relu = nn.GELU()
+        self.relu = nn.SiLU()
         self.conv2 = conv3x3(planes, planes)
         self.bn2 = nn.BatchNorm1d(planes)
         self.downsample = downsample
@@ -201,7 +201,7 @@ class BasicBlock5x5(nn.Module):
         super(BasicBlock5x5, self).__init__()
         self.conv1 = conv5x5(inplanes5, planes, stride)
         self.bn1 = nn.BatchNorm1d(planes)
-        self.relu = nn.GELU()
+        self.relu = nn.SiLU()
         self.conv2 = conv5x5(planes, planes)
         self.bn2 = nn.BatchNorm1d(planes)
         self.downsample = downsample
@@ -235,7 +235,7 @@ class BasicBlock7x7(nn.Module):
         super(BasicBlock7x7, self).__init__()
         self.conv1 = conv7x7(inplanes7, planes, stride)
         self.bn1 = nn.BatchNorm1d(planes)
-        self.relu = nn.GELU()
+        self.relu = nn.SiLU()
         self.conv2 = conv7x7(planes, planes)
         self.bn2 = nn.BatchNorm1d(planes)
         self.downsample = downsample
